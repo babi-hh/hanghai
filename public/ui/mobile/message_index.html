@@ -1,0 +1,71 @@
+<!--<?php
+if($ajaxlist){
+require_once template('/ajax/message');
+}else{
+$ContentsPage=1;
+require_once template('head'); 
+require_once template('sidebar');
+$messagelist=metlabel_messagelist();
+echo <<<EOT
+-->
+        <div class="active" id="messagelist">
+			<h3 class="Tabtitle" style="margin-top:10px;"><div class="l">{$lang_messageview}</div><div class="l now">{$lang_SubmitInfo}</div></h3>
+			<div class="ajaxlist none mb_Tabbox mb_Tabbox_0">
+			<ul>
+				<li>{$messagelist}</li>
+			</ul>
+<!--
+EOT;
+if($pageall>$page){
+echo <<<EOT
+-->
+			<div id="flip" class1="{$class1}" class2="{$class2}" class3="{$class3}" page="{$page}" pageall="{$pageall}">{$lang_fliptext1}</div>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+			</div>
+			<script src="{$img_url}js/met_Verification.js"></script>
+			<div class="metinfo_mobile_form mb_Tabbox mb_Tabbox_1">
+				<form method='POST' name='myform' class="signupForm" action='message.php?action=add'>
+					<ul>
+						<li class="input required">
+							<div class="xbox">
+								<input name='pname' type='text' class='input-text' placeholder="{$lang_Name}" />
+							</div>
+						</li>
+						<li class="input">
+							<div class="xbox">
+								<input name='tel' type='text' class='input-text' placeholder="{$lang_Phone}" />
+							</div>
+						</li>
+						<li class="input">
+							<div class="xbox">
+								<input name='email' type='text' class='input-text' placeholder="{$lang_Email}" />
+							</div>
+						</li>
+						<li class="input">
+							<span class='info'>{$lang_Info5}</span>
+							<div class="xbox">
+								<input name='contact' type='text' class='input-text' placeholder="{$lang_OtherContact}" />
+							</div>
+						</li>
+						<li class="input required">
+							<div class="xbox">
+								<textarea name='info' class='textarea-text' placeholder="{$lang_SubmitContent}"></textarea>
+							</div>
+						</li>
+					</ul>
+					<input type='hidden' name='ip' value='{$m_user_ip}' />
+					<input type='hidden' name='lang' value='{$lang}' />
+					<div class="input-submit"><input type='submit' name='Submit' value='{$lang_SubmitInfo}' /></div>
+				</form>
+			</div>
+        </div>
+<!--
+EOT;
+require_once template('gap');
+require_once template('foot'); 
+}
+?>

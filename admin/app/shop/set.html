@@ -1,0 +1,194 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="在线订购设置";
+require_once template('../../app/shop/top');
+echo <<<EOT
+-->
+<form method="POST" name="myform" action="set.php?anyid={$anyid}&lang={$lang}&cs={$cs}" target="_self">
+<input name="action" id="action" type="hidden" value="modify" />
+<input name="method" id="method" type="hidden" value="" />
+<input name="methodnum" id="methodnum" type="hidden" value="$methodnum" />
+<table cellpadding="2" cellspacing="1" class="table">
+	<tr>
+		<td class="text red">在线订购：</td>
+		<td class="input">
+		<label><input name="met_shop_shopok" type="radio" class="radio" value="1" $met_shop_shopok1[1] >{$lang_open}</label>
+		&nbsp;&nbsp;
+		<label><input name="met_shop_shopok" type="radio" class="radio" value="0" $met_shop_shopok1[0] >{$lang_close}</label>
+		<span class="tips" style="padding-left:20px;">注：在线订购只支持中文，请关闭非中文的在线订购功能。</span>
+		</td>
+	</tr>
+	<tr> 
+		<td class="text"></td>
+        <td class="input color390">
+			付款方式
+		</td>
+    </tr>
+	<tr>
+		<td class="text">货到付款：</td>
+		<td class="input">
+		<label><input name="met_shop_cash" type="radio" class="radio" value="1" $met_shop_cash1[1] >{$lang_open}</label>
+		&nbsp;&nbsp;
+		<label><input name="met_shop_cash" type="radio" class="radio" value="0" $met_shop_cash1[0] >{$lang_close}</label>
+		<span class="tips" style="padding-left:20px;">开启后，用户在提交订单时可以选择货到付款的方式。</span>
+		</td>
+	</tr>
+	<tr> 
+		<td class="text"></td>
+        <td class="input color390">
+			发票信息
+		</td>
+    </tr>
+	<tr>
+		<td class="text">索要发票：</td>
+		<td class="input">
+		<label><input name="met_shop_invoice" type="radio" class="radio" value="1" $met_shop_invoice1[1] >{$lang_open}</label>
+		&nbsp;&nbsp;
+		<label><input name="met_shop_invoice" type="radio" class="radio" value="0" $met_shop_invoice1[0] >{$lang_close}</label>
+		<span class="tips" style="padding-left:20px;">开启后，用户在提交订单时可以选择索要发票。</span>
+		</td>
+	</tr>
+<!--
+EOT;
+$metkxz=explode('|',$met_shop_invoicetype);
+echo <<<EOT
+-->	
+	<tr>
+		<td class="text">发票类型：</td>
+		<td class="input">
+			<div class="metshopk_xz_box">
+			<div class="metshopk_xz_val"><input name="met_shop_invoicetype" type="hidden" class="text" value="$met_shop_invoicetype"/></div>
+				<ul>
+<!--
+EOT;
+foreach($metkxz as $key=>$val){
+if($val!=''){
+echo <<<EOT
+-->	
+				<li class="xz_list"><span>{$val}</span><a></a></li>
+<!--
+EOT;
+}}
+echo <<<EOT
+-->	
+				<li class="xz_tj">
+				<input type="text" id="inputmetshopk" data-mok="0" style="width:30px; display:none;" />
+				<span id="addmetshopk">添加类型</span>
+				</li>
+</ul>
+			<span class="tips">输入类型名称(回车提交)</span>
+			</div>
+		</td>
+	</tr>
+<!--
+EOT;
+$metkxz=explode('|',$met_shop_invoicescontent);
+echo <<<EOT
+-->	
+	<tr>
+		<td class="text">发票内容：</td>
+		<td class="input">
+			<div class="metshopk_xz_box">
+			<div class="metshopk_xz_val"><input name="met_shop_invoicescontent" type="hidden" class="text" value="$met_shop_invoicescontent"/></div>
+				<ul>
+<!--
+EOT;
+foreach($metkxz as $key=>$val){
+if($val!=''){
+echo <<<EOT
+-->	
+				<li class="xz_list"><span>{$val}</span><a></a></li>
+<!--
+EOT;
+}}
+echo <<<EOT
+-->	
+				<li class="xz_tj">
+				<input type="text" id="inputmetshopk" data-mok="0" style="width:30px; display:none;" />
+				<span id="addmetshopk">添加类型</span>
+				</li>
+</ul>
+			<span class="tips">输入类型名称(回车提交)</span>
+			</div>
+		</td>
+	</tr>
+	<tr> 
+		<td class="text"></td>
+        <td class="input color390">
+			商品价格
+		</td>
+    </tr>
+	<tr>
+		<td class="text">价格字段：</td>
+		<td class="input">
+			<select name="met_shop_price" class="noselect">
+			<option value="" selected="selected"></option>
+<!--
+EOT;
+foreach($para as $key=>$val){
+echo <<<EOT
+-->	
+			<option value="$val[id]" {$met_shop_price1[$val[id]]}>$val[name]</option>
+<!--
+EOT;
+}
+echo <<<EOT
+-->					
+			</select>
+			<span class="tips">注：请在栏目配置，产品字段中添加</span>
+		</td>
+	</tr>
+	<tr> 
+		<td class="text"></td>
+        <td class="input color390">
+			配送方式（物流名称 - 价格/元）
+		</td>
+    </tr>
+	<tr>
+		<td class="text">配送方式：</td>
+		<td class="input">
+			<ul id="newmethodlist">
+<!--
+EOT;
+foreach($met_method1 as $key=>$val){
+echo <<<EOT
+-->	
+			<li>
+				<input class='method_1' value="$val[0]" style="width:60px;" />&nbsp;
+				<input class='method_2' value="$val[1]" style="width:30px;" />&nbsp;
+				<a href="javascript:;" onclick="newmethod_del($(this))">删除</a>
+			</li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->		
+			</ul>
+			<input id='newmethod1' value="" style="width:60px;" />&nbsp;&nbsp;<input id='newmethod2' value="" style="width:30px;" />
+			&nbsp;<a href="javascript:newmethod();">新增</a>
+		</td>
+	</tr>
+	<tr> 
+		<td class="text"></td>
+		<td class="submit">
+			<input name="submit" type='submit' value='保存' class="submit li-submit" onclick="return momethod();" />
+		</td>
+    </tr>
+</table>	
+<div class="footer">$foot</div>
+</form>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

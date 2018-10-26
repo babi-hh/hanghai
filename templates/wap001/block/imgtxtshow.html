@@ -1,0 +1,61 @@
+<!--<?php
+$Column3[name] = $lang_Column3_title==''?$Column3[name]:$lang_Column3_title;
+if($lang_Column3_urlOK){
+	$urlhtmla = "<a href=\"{$Column3[url]}\">";
+	$urlhtmlb = '<span class="more"></span></a>';
+	$urlhtmlc = '';
+}else{
+	$urlhtmla = '';
+	$urlhtmlb = '';
+	$urlhtmlc = 'urlno';
+}
+echo <<<EOT
+-->
+<!--图片滚动展示-->
+	<div class="index-product style-1">
+		<h3 class='title {$urlhtmlc}'>{$urlhtmla}{$Column3[name]}{$urlhtmlb}</h3>
+		<div class="active">
+			<ul class="imgtxtshow_slides">
+<!--
+EOT;
+$imgshowlist=methtml_getarray($lang_Column3,$lang_Column3_xxtype,'','',$lang_imgshownum);
+$p=ceil(count($imgshowlist)/$lang_groupnumber);
+$k=0;
+for($m=0;$m<$p;$m++){
+$i=$k+$lang_groupnumber;
+$csnm = $lang_groupnumber==1?'class="number1"':'';
+echo <<<EOT
+-->
+				<li {$csnm}>
+<!--
+EOT;
+$j=0;
+foreach($imgshowlist as $key=>$val){
+$j++;
+if($j>$k){
+$k++;
+$val[phtml]=$lang_Column3_Tok?"<p>{$val[title]}</p>":'';
+echo <<<EOT
+-->
+	<a href="{$val[url]}">
+		<img src="{$val[imgurls]}" alt="{$met_alt}" title="{$met_alt}" />
+		{$val[phtml]}
+	</a>
+<!--
+EOT;
+if($k==$i)break;
+}}
+echo <<<EOT
+-->
+				</li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+			</ul>
+		</div>
+	</div>
+<!--
+EOT;
+?>

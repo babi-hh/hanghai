@@ -1,0 +1,77 @@
+<!--<?php
+require_once template('head'); 
+$weblist=metlabel_news(1,1,50);
+echo <<<EOT
+-->
+
+<!--分类 -->
+<div class="news-type">
+	<div class="wrap">
+    	<ul>
+        <!--
+EOT;
+$nav2=$nav_list2[$class1];
+foreach($nav2 as $key=>$val){
+$sty=$class2==$val['id']?'now':'';
+echo <<<EOT
+-->
+        	<li><a href="{$val['url']}" class="{$sty}">{$val['name']}</a></li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+        </ul>
+        <span class="path">
+        	{$lang_position}：<a href="{$index_url}" title="{$lang_home}">{$lang_home}</a> &gt; {$nav_x[name]}
+        </span>
+    </div>
+</div>
+<!--分类 -->
+
+<!--栏目 -->
+<div class="column">
+    <h2>{$class_list[$classnow][name]}</h2>
+</div>
+<!--栏目 -->
+ 
+<!--成功案例 -->
+<div class="home-case">
+	
+    <!--内容 -->
+    <div class="wrap">
+    	<ul>
+<!--
+EOT;
+foreach($news_list as $key=>$val){
+$desc=utf8substr($val['description'],0,80);
+echo <<<EOT
+--> 
+        	<li>
+            	<span class="pic">
+                	<a href="{$val['url']}"><img src="{$val['imgurl']}" /></a>
+                </span>
+                <span class="text">
+                	<h3><a href="{$val['url']}">{$val['title']}</a></h3>
+                    <p>{$desc}</p>
+                </span>
+            </li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+        </ul>
+    </div>
+    <!--内容 -->
+    
+    <div class="clear"></div>
+    <div id="flip" style="text-align: center;padding:40px 0px;">{$page_list}</div>
+    
+</div>
+<!--成功案例 -->
+
+<!--
+EOT;
+require_once template('foot'); 
+?>

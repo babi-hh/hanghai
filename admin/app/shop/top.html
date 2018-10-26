@@ -1,0 +1,27 @@
+<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.d.
+require_once template('metlangs');
+echo <<<EOT
+-->
+<link rel="stylesheet" type="text/css" href="css/metinfo.css" />
+<script type="text/javascript"src="js/metinfo.js" charset='utf-8'></script>
+<div class="stat_list">
+	<div style="float:right; height:28px; line-height:28px; margin:8px 10px 0px;">
+	<a href="http://www.metinfo.cn/course/faq/31-cn.html" style=" color:#f00;" target="_blank">使用帮助</a>
+	</div>
+	<ul>
+		<li {$listclass[1]}><a href="index.php?anyid={$anyid}&lang={$lang}&cs=1" title="订单管理">订单管理</a></li>
+		<li {$listclass[6]}><a href="financial.php?anyid={$anyid}&lang={$lang}&cs=6" title="财务管理">财务管理</a></li>
+		<li {$listclass[2]}><a href="set.php?anyid={$anyid}&lang={$lang}&cs=2" title="在线订购设置">在线订购设置</a></li>
+		<li {$listclass[3]}><a href="pfield.php?anyid={$anyid}&lang={$lang}&cs=3&module=3" title="可选字段设置">可选字段设置</a></li>
+		<li {$listclass[4]}><a href="alipayset.php?anyid={$anyid}&lang={$lang}&cs=4" title="支付接口设置">支付接口设置</a></li>
+		<li {$listclass[5]}><a href="emailsms.php?anyid={$anyid}&lang={$lang}&cs=5" title="短信邮件提醒设置">短信邮件提醒设置</a></li>
+	</ul>
+</div>
+<div style="clear:both;"></div>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved..
+?>

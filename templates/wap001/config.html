@@ -1,0 +1,20 @@
+<?php
+/*页面全局标签（顶部）-------------------------------*/
+$methtml_head=metlabel_html5(0,'',1);//基于Html5
+$metlang=metlable_lang('<span>|</span>');//语言切换标签
+$met_nav=metlabel_nav(1,'','','',0);//顶部导航标签
+/*页面全局标签（底部）--------------------------------*/
+/*---------------------------------------------------*/
+if($classnow==10001){//首页标签
+	$Column1=tmpcentarr($lang_Column1);
+	$Column2=tmpcentarr($lang_Column2);
+	$Column3=tmpcentarr($lang_Column3);
+	$Column4=tmpcentarr($lang_Column4);
+	$Column5=tmpcentarr($lang_Column5);
+	$Column6=tmpcentarr($lang_Column6);
+	$Column7=tmpcentarr($lang_Column7);
+}else{//内页标签
+	$sidebar=metlabel_sidebar(0,1);//内页侧栏标签
+	$sidebar_title=metlabel_sidebar(1);//内页侧栏标题
+}
+?>

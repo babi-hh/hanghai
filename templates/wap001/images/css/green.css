@@ -1,0 +1,27 @@
+/*红色*/
+
+/*背景颜色*/
+.top{ background-color:#00a431; }/*顶部背景颜色*/
+.top-right li.now,.seachbox{ background-color:#007834; }/*顶部工具栏点击后变色*/
+.seachbox input.submit{ background-color:#019742; }/*顶部工具栏按钮颜色*/
+nav.type1,nav.type2 ul,nav.type2 ul li,.index-product .ui-slider-dots b.ui-state-active{ background-color:#2ab749;}
+nav.type1 ul li.navdown{ background-color:#ededed;}/*当前页面导航颜色*/
+.style-1 h3.title{ background:-webkit-gradient(linear,0 0,0 100%,from(#00b535),to(#00a431));} /*首页区块标题背景*/
+
+/*面板*/
+#wrapper_nav,nav.panel,#wrapper_sidebar,#sidebar,#sidebar dl{ background-color:#1c5e38;}/*面板背景颜色*/
+nav.panel h3.title,#sidebar h3.title{ background-color:#40865f;}/*面板标题背景颜色*/
+nav.panel ul li,#sidebar dt,#sidebar dd{ border-color:#134e2c; }/*面板底部边框颜色*/
+
+/*底部固定功能*/
+#footer .footerlist{ background:-webkit-gradient(linear,0 0,0 100%,from(#00bc38),to(#018d2b));}
+
+/*边框颜色*/
+nav.type2 ul li a,nav.type1 ul li{ border-color:#12ae33;}
+
+.metinfo_mobile_form li.radio span.name,.metinfo_mobile_form li.select span.name{ 
+	background-image: linear-gradient(#59dc84, #30b35b);
+	border-color:#30b35b;
+}
+#memberbox .member_login_more a{ color:#00cc22;}
+#sitemaplist h2{background-image: linear-gradient(#59dc84, #30b35b);}

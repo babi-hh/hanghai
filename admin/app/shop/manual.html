@@ -1,0 +1,55 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="<a href=\"financial.php?anyid={$anyid}&lang={$lang}&cs={$cs}\">财务管理</a>>手动入款/扣款";
+require_once template('metlangs');
+echo <<<EOT
+-->
+<form method="POST" name="myform" action="manual.php?anyid={$anyid}&lang={$lang}&cs={$cs}" target="_self">
+<input name="action" id="action" type="hidden" value="add" />
+<table cellpadding="2" cellspacing="1" class="table">
+<tr>
+	<td class="text"><font color="#FF0000">*</font>用户名</td>
+	<td class="input"><input name="username" type="text" class="text" value="$username" /></td>
+</tr>
+<tr>
+	<td class="text">类型</td>
+	<td class="input">
+	<select name="status" class="noselect">
+	<option value="2" $state1[2]>入款</option>
+	<option value="1" $state1[1]>扣款</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>金额</td>
+	<td class="input"><input name="cost" type="text" class="text" value="$cost" /></td>
+</tr>
+<tr>
+	<td class="text">事由</td>
+	<td class="input"><textarea name="remark" class="textarea gen">$remark</textarea></td>
+	</tr>
+<tr>
+<tr>
+	<td class="text"></td>
+	<td class="input"><input name="submit" type='submit' value='确认' class="submit li-submit" onclick="return momethod();" />&nbsp;
+	<a href="financial.php?anyid={$anyid}&lang={$lang}&cs={$cs}">返回</a>
+	</td>
+	</tr>
+<tr>
+</table >
+</form>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

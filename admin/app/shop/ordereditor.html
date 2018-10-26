@@ -1,0 +1,171 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+require_once template_app('shop/style');
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="订单管理";
+require_once template('metlangs');
+echo <<<EOT
+-->
+<table cellpadding="2" cellspacing="1" border="0" width="95%" class="table_member" style="margin-top:15px;">
+<tr>
+<th>商品名称</th>
+<th>商品描述</th>
+<th>商品单价</th>
+<th>商品数量</th>
+</tr>
+<!--
+EOT;
+foreach($cart as $key=>$val){
+echo <<<EOT
+-->
+<tr>
+<td>$val[shopname]</td>
+<td>$val[shopdescription]</td>
+<td>$val[unitprice]</td>
+<td>$val[shopnum]</td>
+</tr>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+</table >
+<form method="POST" name="myform" action="ordereditor.php?anyid={$anyid}&lang={$lang}&cs={$cs}" target="_self">
+<input name="action" id="action" type="hidden" value="modify" />
+<input name="id" type="hidden" value="$orders[id]" />
+<input name="oldf" type="hidden" value="$orders[freight]" />
+<input name="total" type="hidden" value="$orders[total]" />
+<table cellpadding="2" cellspacing="1" class="table_member" style="margin-top:15px;">
+<tr>
+	<th colspan="2">基本信息</th>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>订单号：</td>
+	<td class="input">$orders[ordernumber]</td>
+</tr>
+<tr>
+	<td class="text">订单状态：</td>
+	<td class="input">
+	<select name="status" class="noselect">
+	<option value="1" $status1[1]>订购中</option>
+	<option value="2" $status1[2]>已下单</option>
+	<option value="3" $status1[3]>已付款</option>
+	<option value="4" $status1[4]>已发货</option>
+	<option value="5" $status1[5]>交易完成</option>
+	</select>
+	</td>
+</tr>
+<tr>
+	<th colspan="2" class="ce">收货人信息</th>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>收货人姓名：</td>
+	<td class="input">$orders[consignee]</td>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>地址：</td>
+	<td class="input">$orders[address]</td>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>手机号码(固定电话)：</td>
+	<td class="input">$orders[tel]</td>
+</tr>
+<tr>
+	<td class="text">电子邮件：</td>
+	<td class="input">$orders[email]</td>
+</tr>
+<tr>
+	<td class="text">邮政编码：</td>
+	<td class="input">$orders[postal]</td>
+</tr>
+<tr>
+	<th colspan="2" class="ce">支付和配送方式</th>
+</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>支付方式：</td>
+	<td class="input">$orders[payment]</td>
+	</tr>
+<tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>配送方式：</td>
+	<td class="input">$orders[method]</td>
+	</tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>运费：</td>
+	<td class="input"><input type="text" name="freight" class="text" value="$orders[freight]"/> 元</td>
+	</tr>
+<tr>
+<tr>
+	<td class="text"><font color="#FF0000">*</font>运单号：</td>
+	<td class="input"><input type="text" name="waybill" class="text" value="$orders[waybill]"/></td>
+	</tr>
+<tr>
+<!--
+EOT;
+if($met_shop_invoice && $orders[invoice]!=''){
+echo <<<EOT
+-->
+<tr>
+	<th colspan="2" class="ce">发票信息</th>
+</tr>
+<tr>
+	<td class="text">发票类型：</td>
+	<td class="input">$orders[invoicetype]</td>
+	</tr>
+<tr>
+	<td class="text">发票抬头：</td>
+	<td class="input">$orders[invoice]</td>
+	</tr>
+<tr>
+	<td class="text">发票内容：</td>
+	<td class="input">$orders[invoicescontent]</td>
+	</tr>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+<tr>
+	<th colspan="2" class="ce">结算信息</th>
+</tr>
+<tr>
+	<td class="text">订单时间：</td>
+	<td class="input">$orders[time]</td>
+	</tr>
+<tr>
+<tr>
+	<td class="text">支付宝交易号：</td>
+	<td class="input">$orders[alipay]</td>
+	</tr>
+<tr>
+<tr>
+	<td class="text">总费用：</td>
+	<td class="input"><input type="text" class='text' name="total" id="total" value="$orders[total]">元</td>
+	</tr>
+<tr>
+<tr>
+	<td class="text">备注：</td>
+	<td class="input"><textarea name="remark" class="textarea gen">$orders[remark]</textarea></td>
+	</tr>
+<tr>
+<tr>
+	<td class="text"></td>
+	<td class="input"><input name="submit" type='submit' value='修改信息' class="submit li-submit" onclick="return momethod();" /></td>
+	</tr>
+<tr>
+</table >
+</form>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

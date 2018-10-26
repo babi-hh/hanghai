@@ -1,0 +1,31 @@
+<!--<?php
+require_once template('head');
+echo <<<EOT
+-->
+<div class="index">
+<!--
+EOT;
+if($map==1){
+	require_once template('block/map');
+}else{
+echo <<<EOT
+-->
+<!--
+EOT;
+	$oderlist = Array();
+	if($lang_Column1_ok)$oderlist[$lang_aboutoder]= 'block/about';
+	if($lang_Column2_ok)$oderlist[$lang_imgtxtoder]= 'block/imgtxt';
+	if($lang_Column3_ok)$oderlist[$lang_imgtxtshowoder]= 'block/imgtxtshow';
+	if($lang_Column4_ok)$oderlist[$lang_newslistoder]= 'block/newslist';
+	ksort($oderlist,SORT_NUMERIC);
+	foreach($oderlist as $key=>$val){
+	require_once template($val);
+	}
+}
+echo <<<EOT
+-->
+</div>
+<!--
+EOT;
+require_once template('foot');
+?>

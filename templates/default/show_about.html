@@ -1,0 +1,79 @@
+<!--<?php
+require_once template('head'); 
+echo <<<EOT
+-->
+<!--栏目 -->
+<div class="column">
+	<h2>关于天佑</h2>
+</div>
+<!--栏目 -->
+
+<!--关于我们 -->
+<div class="page-about-box">
+	<div class="wrap">
+    
+        <!--切换 -->
+        <div class="hd">
+            <ul>
+<!--
+EOT;
+$nav2=$nav_list2[$class1];
+foreach($nav2 as $key=>$val){
+echo <<<EOT
+-->
+                <li>{$val['name']}</li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+            </ul>
+        </div>
+        <!--切换 -->
+    
+        <!--内容 -->
+        <div class="bd">
+            <!--
+EOT;
+$nav2=$nav_list2[$class1];
+foreach($nav2 as $key=>$val){
+echo <<<EOT
+-->
+            <!--企业简介 -->
+            <ul>
+                <li>
+                  {$val['content']} 
+                </li>
+            </ul>
+            <!--企业简介 -->
+            <!--
+EOT;
+}
+echo <<<EOT
+-->
+          
+            
+            
+        </div>
+        <!--内容 -->
+    
+    </div>
+</div>
+<!--关于我们 -->
+
+<!--咨询 -->
+<div class="about-consult">
+	<div class="wrap">
+    	<span class="text">
+        	天佑设计团队衷心希望成为您的商业合作伙伴，并以专业的态度和真诚的服务，赢得您的信任与支持。 相信我们的服务将会为您创造更高的经济效益！
+        </span>
+        <span class="btn">
+        	<button>立即咨询</button>
+        </span>
+    </div>
+</div>
+<!--咨询 -->
+<!--
+EOT;
+require_once template('foot');
+?>

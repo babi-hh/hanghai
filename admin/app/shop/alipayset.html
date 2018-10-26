@@ -1,0 +1,156 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="支付接口设置";
+//$rurl="../dlapp/index.php?anyid={$anyid}&lang={$lang}";
+require_once template('metlangs');
+require_once template('../../app/shop/top');
+echo <<<EOT
+-->
+<form method="POST" name="myform" action="alipayset.php?anyid={$anyid}&lang={$lang}&cs={$cs}" target="_self">
+<input name="action" id="action" type="hidden" value="modify" />
+<table cellpadding="2" cellspacing="1" class="table">
+<tbody><tr>
+<td class="text">提示信息：</td>
+<td class="input">以下接口需要申请的是B2C<span class="f_red">即时到帐</span>交易，接口功能类似，一般只需要开通任意一个即可</td>
+</tr>
+<tr>
+<td class="text"><strong>财付通 TenPay</strong></td>
+<td class="input">
+<input type="radio" name="pay[tenpay][enable]" value="1" checked="" onclick="$('#tenpay').show();"> 启用&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="pay[tenpay][enable]" value="0" onclick="$('#tenpay').hide();"> 禁用&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+</tbody>
+<!--
+EOT;
+$sty1=($row[tenpay][enable]==1)?"":"none";
+$sty2=($row[alipay][enable]==1)?"":"none";
+$sty3=($row[chinabank][enable]==1)?"":"none";
+echo <<<EOT
+-->
+<tbody style="display:{$sty1}; " id="tenpay">
+<tr>
+<td class="text">显示名称</td>
+<td class="input"><input type="text" size="30" name="pay[tenpay][name]" value="{$row[tenpay][name]}"></td>
+</tr>
+<tr>
+<td class="text">显示顺序</td>
+<td class="input"><input type="text" size="2" name="pay[tenpay][listorder]" value="{$row[tenpay][listorder]}"></td>
+</tr>
+<tr>
+<td class="text">商户编号</td>
+<td class="input"><input type="text" size="60" name="pay[tenpay][partnerid]" value="{$row[tenpay][partnerid]}"></td>
+</tr>
+<tr>
+<td class="text">支付密钥</td>
+<td class="input"><input type="text" size="60" name="pay[tenpay][keycode]" value="{$row[tenpay][keycode]}"></td>
+</tr>
+<tr>
+<td class="text">扣除手续费</td>
+<td class="input"><input type="text" size="2" name="pay[tenpay][percent]" value="1"> %</td>
+</tr>
+</tbody>
+
+<tbody><tr>
+<td class="text"><strong>支付宝 Alipay</strong></td>
+<td class="input">
+<input type="radio" name="pay[alipay][enable]" value="1" checked="" onclick="$('#alipay').show();"> 启用&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="pay[alipay][enable]" value="0" onclick="$('#alipay').hide"> 禁用&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+</tbody><tbody style="display: {$sty2}; " id="alipay">
+<tr>
+<td class="text">显示名称</td>
+<td class="input"><input type="text" size="30" name="pay[alipay][name]" value="{$row[alipay][name]}"></td>
+</tr>
+<tr>
+<td class="text">显示顺序</td>
+<td class="input"><input type="text" size="2" name="pay[alipay][listorder]" value="{$row[alipay][listorder]}"></td>
+</tr>
+<tr>
+<td class="text">支付宝帐号</td>
+<td class="input"><input type="text" size="30" name="pay[alipay][email]" value="{$row[alipay][email]}"> </td>
+</tr>
+<tr>
+<td class="text">合作者身份（partnerID）</td>
+<td class="input"><input type="text" size="60" name="pay[alipay][partnerid]" value="{$row[alipay][partnerid]}"></td>
+</tr>
+<tr>
+<td class="text">交易安全校验码（key）</td>
+<td class="input"><input type="text" size="60" name="pay[alipay][keycode]" value="{$row[alipay][keycode]}" onfocus="if(this.value.indexOf('**')!=-1)this.value='';"></td>
+</tr>
+<tr>
+<td class="text">接口类型</td>
+<td class="input"><select name="pay[alipay][type]">
+<!--
+EOT;
+$alipay_t1=($row[alipay][type]==0)?"selected":"";
+$alipay_t2=($row[alipay][type]==1)?"selected":"";
+echo <<<EOT
+-->
+<option value="0" {$alipay_t1}>支付宝担保交易</option>
+<option value="1" {$alipay_t2}>及时到帐交易</option>
+</select></td>
+</tr>
+<tr>
+<td class="text">扣除手续费</td>
+<td class="input"><input type="text" size="2" name="pay[alipay][percent]" value="{$row[alipay][percent]}"> %</td>
+</tr>
+</tbody>
+
+
+
+<tbody><tr>
+<td class="text"><strong>网银在线 ChinaBank</strong></td>
+<td class="input">
+<input type="radio" name="pay[chinabank][enable]" value="1" checked="" onclick="$('#chinabank').hide();"> 启用&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="radio" name="pay[chinabank][enable]" value="0" onclick="$('#chinabank').show();"> 禁用&nbsp;&nbsp;&nbsp;&nbsp;
+</td>
+</tr>
+</tbody><tbody style="display:{$sty3};" id="chinabank">
+<tr>
+<td class="text">显示名称</td>
+<td class="input"><input type="text" size="30" name="pay[chinabank][name]" value="{$row[chinabank][name]}"></td>
+</tr>
+<tr>
+<td class="text">显示顺序</td>
+<td class="input"><input type="text" size="2" name="pay[chinabank][listorder]" value="{$row[chinabank][listorder]}"></td>
+</tr>
+<tr>
+<td class="text">商户编号</td>
+<td><input type="text" size="60" name="pay[chinabank][partnerid]" value="{$row[chinabank][partnerid]}"></td>
+</tr>
+<tr>
+<td class="text">支付密钥</td>
+<td class="input"><input type="text" size="60" name="pay[chinabank][keycode]" value="{$row[chinabank][keycode]}"></td>
+</tr>
+<tr>
+<td class="text">扣除手续费</td>
+<td class="input"><input type="text" size="2" name="pay[chinabank][percent]" value="{$row[chinabank][percent]}"> %</td>
+</tr>
+</tbody>
+<tr> 
+		<td class="text"></td>
+		<td class="submit">
+			<input name="submit" type='submit' value='保存' class="submit li-submit" onClick="return momethod();" />
+		</td>
+    </tr>
+</table>
+</form>
+
+<div class="footer">$foot</div>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

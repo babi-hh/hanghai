@@ -1,0 +1,20 @@
+<!--<?php
+$Column1[name] = $lang_Column1_title==''?$Column1[name]:$lang_Column1_title;
+if($lang_Column1_urlOK){
+	$urlhtmla = "<a href=\"{$Column1[url]}\">";
+	$urlhtmlb = '<span class="more"></span></a>';
+	$urlhtmlc = '';
+}else{
+	$urlhtmla = '';
+	$urlhtmlb = '';
+	$urlhtmlc = 'urlno';
+}
+echo <<<EOT
+-->
+	<div class="aboutus style-1">
+		<h3 class='title {$urlhtmlc}'>{$urlhtmla}{$Column1[name]}{$urlhtmlb}</h3>
+		<div class="active editor clear contour-1">{$wap_index_content}<div class="clear"></div></div>
+	</div>
+<!--
+EOT;
+?>

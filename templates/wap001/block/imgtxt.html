@@ -1,0 +1,64 @@
+<!--<?php
+$Column2[name] = $lang_Column2_title==''?$Column2[name]:$lang_Column2_title;
+if($lang_Column2_urlOK){
+	$urlhtmla = "<a href=\"{$Column2[url]}\">";
+	$urlhtmlb = '<span class="more"></span></a>';
+	$urlhtmlc = '';
+}else{
+	$urlhtmla = '';
+	$urlhtmlb = '';
+	$urlhtmlc = 'urlno';
+}
+echo <<<EOT
+-->
+<!--图文列表-->
+	<div class="index-product style-1">
+		<h3 class='title {$urlhtmlc}'>{$urlhtmla}{$Column2[name]}{$urlhtmlb}</h3>
+		<div class="active dl-jqrun">
+<!--
+EOT;
+$listarray=$lang_Column2_listype?methtml_getarray($lang_Column2,$lang_Column2_xxtype,'','',$lang_imgtextnum):(count($nav_list2[$Column2['id']])?$nav_list2[$Column2['id']]:$nav_list3[$Column2['id']]);
+$i=0;
+foreach($listarray as $key=>$val){
+$i++;
+if(!$lang_Column2_listype){//判断是否为显示栏目列表
+$val[columnimg]=$val[columnimg]?$val[columnimg]:'public/images/metinfo.gif';
+if(strstr($val[columnimg],"../")){
+$valcimg = explode('../',$val[columnimg]);
+$val[imgurls] = $valcimg[1];
+}else{
+$val[imgurls]=$val[columnimg];
+}
+$val[title] = $val[name];
+}
+if($lang_Column2_listurlOK){//是否开启链接
+$listurlhtmla = "<a href=\"{$val[url]}\">";$listurlhtmlb = '</a>';$listurlhtmlc = '';
+}else{
+$listurlhtmla = '';$listurlhtmlb = '';$listurlhtmlc = 'urlno';
+}
+$val['desc']=utf8substr($val['description'],0,$lang_descsubstr);
+echo <<<EOT
+-->
+	{$listurlhtmla}
+		<dl class="ind {$listurlhtmlc}">
+            <dt>
+			<img src="{$val[imgurls]}" alt="{$met_alt}" title="{$met_alt}" />
+			</dt>
+			<dd>
+			    <h4>{$val[title]}</h4>
+				<p class="desc" title="{$val[description]}">{$val[desc]}</p>
+			</dd>
+			<dt class="more"></dt>
+		</dl>
+	{$listurlhtmlb}
+<!--
+EOT;
+if($i>=$lang_imgtextnum)break;
+}
+echo <<<EOT
+-->
+		</div>
+	</div>
+<!--
+EOT;
+?>

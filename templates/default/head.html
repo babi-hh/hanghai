@@ -1,0 +1,211 @@
+<!--<?php
+require_once template('config');
+echo <<<EOT
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta http-equiv = "X-UA-Compatible" content = "IE=edge,chrome=1" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="format-detection" content="telephone=no">
+    <title>$met_title</title>
+	<meta name="description" content="$show[description]" />
+	<meta name="keywords" content="$show[keywords]" />
+<script src="{$img_url}js/jquery.min.js"></script>
+<script src="{$img_url}js/wapSlide.js"></script>
+<script src="{$img_url}js/slide.js"></script>
+<script src="{$img_url}js/iscroll.js"></script>
+<script src="{$img_url}js/drawer.min.js"></script>
+<!--[if lt IE 9]>
+<script src="{$img_url}js/respond.min.js"></script>
+<script src="{$img_url}js/html5shiv.min.js"></script>
+<![endif]-->
+<!--[if IE]><link href="{$img_url}css/ie.css" rel="stylesheet" type="text/css"><![endif]-->
+<link href="{$img_url}css/normalize.css" rel="stylesheet" type="text/css">
+<link href="{$img_url}css/typo.css" rel="stylesheet" type="text/css">
+<link href="{$img_url}css/wapSlide.css" rel="stylesheet" type="text/css">
+<link href="{$img_url}css/style.css" rel="stylesheet" type="text/css">
+<link href="{$img_url}css/wap.css" rel="stylesheet" type="text/css">
+<link href="{$img_url}css/drawer.min.css" rel="stylesheet" type="text/css">
+</head>
+
+
+<body class="drawer drawer--right"> 
+
+
+<!--头部 -->
+<div class="header">
+	<div class="wrap">
+    	
+        <!--logo -->
+        <div class="logo">
+        	<a href="#"><img src="{$img_url}images/logo.png" /></a>
+        </div>
+        <!--logo -->
+        
+        <!--合作 -->
+        <div class="cooperate">
+        	<ul>
+            	<li>
+                	<span class="text">
+                    	富力电商
+                    </span>
+                    <span class="pic">
+                    	LOGO
+                    </span>
+                </li>
+                
+                <li>
+                	<span class="text">
+                    	大梨设计
+                    </span>
+                    <span class="pic">
+                    	LOGO
+                    </span>
+                </li>
+                
+                <li>
+                	<span class="text">
+                    	阿里合作
+                    </span>
+                    <span class="pic">
+                    	<img src="{$img_url}images/hz-03.png" />
+                    </span>
+                </li>
+                
+                <li>
+                	<span class="text">
+                    	拼多多合作
+                    </span>
+                    <span class="pic">
+                    	<img src="{$img_url}images/hz-04.png" />
+                    </span>
+                </li>
+            </ul>
+        </div>
+        <!--合作 -->
+        
+        <!--咨询 -->
+        <div class="consult">
+        	<p>咨询热线：0571-28278481</p>
+            <h3>高效服务，让你的产品成为大牌</h3>
+        </div>
+        <!--咨询 -->
+        
+    </div>
+</div>
+<!--头部 -->
+
+<!--导航 -->
+<div class="nav pc">
+	<div class="wrap">
+    	<ul>
+        <!--
+EOT;
+$sty1=$class1==10001?'now':'';
+echo <<<EOT
+-->	
+        	<li><a href="{$index_url}" class="{$sty1}">首页</a></li>
+                    <!--
+EOT;
+$nav2=$nav_list;
+foreach($nav2 as $key=>$val){
+$sty=$val[id]==$class1?'now':'';
+echo <<<EOT
+-->
+            <li><a href="{$val['url']}" class="{$sty}" style="display:block; width:100%;">{$val['name']}</a></li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->	
+        </ul>
+    </div>
+</div>
+<!--导航 -->
+<!--
+EOT;
+if($class1==10001){
+echo <<<EOT
+-->
+<!--banner -->
+<div class="banner pc">
+	
+    <!--切换 -->
+    <div class="hd">
+    	<ul>
+        	<li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <!--切换 -->
+    
+    <!--图片 -->
+    <div class="bd">
+    	<ul>
+<!--
+EOT;
+foreach($met_flashimg as $key=>$val){
+echo <<<EOT
+-->
+        	<li style="background:url({$val[img_path]}) no-repeat center top;">
+            	<a href="{$val[img_link]}"></a>
+            </li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+        </ul>
+    </div>
+    <!--图片 -->
+    
+</div>
+<!--banner -->
+
+<!--wap banner -->
+<div class="banner wap">
+	<div class="swiper-container">
+        <div class="swiper-wrapper">
+<!--
+EOT;
+foreach($met_flashimg as $key=>$val){
+echo <<<EOT
+-->
+            <div class="swiper-slide">
+            	<img src="{$val[img_path]}" />
+            </div>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+        </div>
+        <!-- Add Pagination -->
+        <div class="swiper-pagination"></div>
+    </div>
+</div>
+<!--wap banner -->
+<!--
+EOT;
+}else{
+echo <<<EOT
+-->
+<!--banner -->
+<div class="page-banner">
+	<img src="{$flash_imgone_img}" />
+</div>
+<!--banner -->
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+<!--
+EOT;
+?>

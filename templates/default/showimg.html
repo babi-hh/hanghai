@@ -1,0 +1,64 @@
+<!--<?php
+require_once template('head'); 
+$met_img=methtml_imgdisplay('img');
+$methits=methtml_hits('img');
+$met_next=methtml_prenextinfo(3);
+echo <<<EOT
+-->
+ <!--分类 -->
+<div class="news-type">
+	<div class="wrap">
+    	<ul>
+        <!--
+EOT;
+$nav2=$nav_list2[$class1];
+foreach($nav2 as $key=>$val){
+$sty=$class2==$val['id']?'now':'';
+echo <<<EOT
+-->
+        	<li><a href="{$val['url']}" class="{$sty}">{$val['name']}</a></li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+        </ul>
+        <span class="path">
+        	{$lang_position}：<a href="{$index_url}" title="{$lang_home}">{$lang_home}</a> &gt; {$nav_x[name]}
+        </span>
+    </div>
+</div>
+<!--分类 -->
+
+<!--新闻内容 -->
+<div class="article">
+	<div class="wrap">
+    
+    	<!--标题 -->
+    	<h1>{$img['title']}</h1>
+        <span class="date">
+        	<em>作者：{$news['issue']}</em>
+            <em>来源：{$news['laiyuan']}</em>
+            <em>发布时间：{$news['updatetime']}</em>
+        </span>
+        <!--标题 -->
+        
+        <!--内容 -->
+        <div class="content">
+        	{$img['content']}
+        </div>
+        <!--内容 -->
+        
+        <!--其他 -->
+        <div class="other">
+        	{$met_next}
+        </div>
+        <!--内容 -->
+        
+    </div>
+</div>
+<!--新闻内容 --> 
+<!--
+EOT;
+require_once template('foot'); 
+?>

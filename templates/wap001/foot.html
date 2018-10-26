@@ -1,0 +1,61 @@
+<!--<?php
+echo <<<EOT
+-->
+<!--
+EOT;
+$foot_menu=wap_foot_menu(2);
+if(!$map){
+echo <<<EOT
+-->
+	<div class="foot-text">
+		{$wap_footertext}
+	</div>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+<!--
+EOT;
+if($lang_footnav_ok){
+echo <<<EOT
+-->
+{$foot_menu}
+<!--
+EOT;
+}else{
+echo <<<EOT
+-->
+<style type="text/css">
+	.metcont{ padding-bottom:0px!important;}
+</style>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+</div>
+<!--
+EOT;
+if($sideok&&!$ContentsPage){
+echo <<<EOT
+-->
+<div class="sidebar_jsbox none"></div>
+		<div id="sidebar" class="none" data-csnow="{$csnow}" data-class3="{$class3}">
+			<h3 class="title">{$sidebar_title}</h3>
+			<div id="wrapper_sidebar">
+				<div id="scroller_sidebar">{$sidebar}</div>
+			</div>
+		</div>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+<script src="{$img_url}js/fun.inc.js" type="text/javascript"></script>
+{$met_stat_js}
+</body>
+</html>
+<!--
+EOT;
+?>-->

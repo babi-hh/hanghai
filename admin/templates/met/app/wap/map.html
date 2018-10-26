@@ -1,0 +1,231 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved. 
+require_once template('head'); 
+echo <<<EOT
+-->
+<style type="text/css">
+#allmap {width: 500px;height: 500px;overflow: hidden;margin:0;}
+#r-result{height:100%;width:20%;float:left;}
+</style>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=fYI33qTijqASUAGSYS1gc3GD"></script>
+</head>
+<!--
+EOT;
+require_once template('app/wap/top');
+echo <<<EOT
+-->
+<body>
+
+<form method="POST" name="myform" action="map.php?lang={$lang}&anyid={$anyid}&cs=5" target="_self">
+		<input name="action" type="hidden" value="modify" />
+		<input name="met_maplng" type="hidden" value="$met_maplng" />
+		<input name="met_maplat" type="hidden" value="$met_maplat" />
+		<input name="met_mapzoom" type="hidden" value="$met_mapzoom" />
+<div class="v52fmbx_tbmax">
+<div class="v52fmbx_tbbox">
+<div class="v52fmbx">		
+	<h3 class="v52fmbx_hr metsliding">{$lang_unitytxt_73}</h3>
+	<div class="v52fmbx_dlbox">
+	<dl>
+		<dt>{$lang_map_input}{$lang_marks}</dt>
+		<dd class="input_float_left">
+			<div id="r-result" style="width:100%;">
+				<input type="text" id="suggestId" size="20" value="" class="text" />
+				<div id="search" class="met_map_buttn" onclick="search()">{$lang_search}</div>
+			</div>
+			<div id="searchResultPanel" style="border:1px solid #C0C0C0;width:150px;height:auto;display:none">
+			</div>
+		</dd>
+	</dl>
+	</div>
+	
+	<div class="v52fmbx_dlbox">
+	<dl>
+		<dt>{$lang_map_title}{$lang_marks}</dt>
+		<dd>
+			<input type="text" name="met_maptitle" id="title" value="$met_maptitle" class="text" />
+		</dd>
+	</dl>
+
+	<div class="v52fmbx_dlbox">
+	<dl>
+		<dt>{$lang_map_contents}{$lang_marks}</dt>
+		<dd>
+			<textarea class="ckeditor textarea gen" id="contents" name="met_mapcontents">$met_mapcontents</textarea>
+			<div class="clear"></div>
+			<div id="add" onclick="dimensional()" class="met_map_buttn" style="margin:0px; margin-top:10px;">{$lang_Submitall}</div>
+		</dd>
+	</dl>
+	</div>
+	<div class="v52fmbx_dlbox">
+	<dl>
+		<dt></dt>
+		<dd>
+			<div id="allmap"></div>
+		</dd>
+	</dl>
+	</div>
+</div>
+</div>
+</div>
+</form>
+
+<div class="footer">{$foot}</div>
+
+<script type="text/javascript" src="{$depth}../ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+	var config = {},depth='{$depth}';
+	config.filebrowserBrowseUrl = depth + '../ckfinder/ckfinder.html';
+	config.filebrowserImageBrowseUrl = depth + '../ckfinder/ckfinder.html?Type=Images';
+	config.filebrowserFlashBrowseUrl = depth + '../ckfinder/ckfinder.html?Type=Flash';
+	config.filebrowserUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files';
+	config.filebrowserImageUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Images';
+	config.filebrowserFlashUploadUrl = depth + '../ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Flash';
+	config.toolbar_Full = [['FontSize', 'Bold', 'TextColor', 'Link', 'Unlink', 'Image', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', 'Source']];
+	config.height = 100;
+	config.width = '80%';
+	config.enterMode=2;
+var editor = CKEDITOR.replace("met_mapcontents",config);
+	CKEDITOR.on('instanceReady',
+	function() {
+		ifreme_methei(630);
+	});
+
+function G(id) {
+    return document.getElementById(id);
+}
+// 百度地图API功能
+var mapopts = {
+	enableMapClick:false,
+	mapType:BMAP_NORMAL_MAP
+}
+var map = new BMap.Map("allmap",mapopts);
+map.addControl(new BMap.NavigationControl({anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_ZOOM}));
+var lng=$("input[name='met_maplng']").val();
+var lat=$("input[name='met_maplat']").val();
+var zoom=$("input[name='met_mapzoom']").val();
+if(!(lng&&lat)){
+	lng='116.404';
+	lat='39.915';
+}
+if(!zoom){
+	zoom='15';
+}
+zoom=parseInt(zoom);
+var point=new BMap.Point(lng,lat);
+var marker=new BMap.Marker(point);
+marker = new BMap.Marker(point);  // 创建标注
+map.addOverlay(marker);
+add();
+
+map.centerAndZoom(point, zoom);
+map.enableScrollWheelZoom();
+function showInfo(e){
+ //alert(e.point.lng + ", " + e.point.lat);
+ map.clearOverlays();
+ point = new BMap.Point(e.point.lng,e.point.lat);
+ map.centerAndZoom(point, map.getZoom());
+ marker = new BMap.Marker(point);  // 创建标注
+ map.addOverlay(marker);
+ add();
+}
+map.addEventListener("click", showInfo);
+
+function zoomchange(){
+	 map.centerAndZoom(point, map.getZoom());
+}
+map.addEventListener("zoomend", zoomchange);
+
+var ac = new BMap.Autocomplete(    //建立一个自动完成的对象
+    {"input" : "suggestId"
+    ,"location" : map
+});
+
+ac.addEventListener("onhighlight", function(e) {  //鼠标放在下拉列表上的事件
+var str = "";
+    var _value = e.fromitem.value;
+    var value = "";
+    if (e.fromitem.index > -1) {
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }    
+    str = "FromItem<br />index = " + e.fromitem.index + "<br />value = " + value;
+    
+    value = "";
+    if (e.toitem.index > -1) {
+        _value = e.toitem.value;
+        value = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    }    
+    str += "<br />ToItem<br />index = " + e.toitem.index + "<br />value = " + value;
+    G("searchResultPanel").innerHTML = str;
+});
+
+var myValue;
+ac.addEventListener("onconfirm", function(e) {    //鼠标点击下拉列表后的事件
+	var _value = e.item.value;
+    myValue = _value.province +  _value.city +  _value.district +  _value.street +  _value.business;
+    G("searchResultPanel").innerHTML ="onconfirm<br />index = " + e.item.index + "<br />myValue = " + myValue;
+    setPlace();
+});
+
+function setPlace(){
+    map.clearOverlays();    //清除地图上所有覆盖物
+    function myFun(){
+        point = local.getResults().getPoi(0).point;    //获取第一个智能搜索的结果
+        map.centerAndZoom(point, 15);
+        map.addOverlay(new BMap.Marker(point));    //添加标注
+    }
+    var local = new BMap.LocalSearch(map, { //智能搜索
+      onSearchComplete: myFun
+    });
+    local.search(myValue);
+}
+function search(){
+	myValue=$('#suggestId').val();
+	setPlace();
+}
+function add(){
+	var content = editor.getData(); 
+	//var content = '123';
+	//marker = new BMap.Marker(point);
+	var offset=new BMap.Size(10,-20);
+	//marker.setOffset(offset);
+	var opts = {
+	  //width : 200,     // 信息窗口宽度
+	  //height: 60,     // 信息窗口高度
+	  title : '<b>'+$('#title').val()+'</b>' , // 信息窗口标题
+	  enableMessage:false,//设置允许信息窗发送短息
+	  enableCloseOnClick:false,
+	  message:$('#title').val(),
+	  offset:offset//偏移量
+	}
+	var infoWindow = new BMap.InfoWindow('<div style="border-top:1px solid #999; margin:5px 0px 0px; padding-top:5px;">'+content+'</div>', opts);  // 创建信息窗口对象
+	map.openInfoWindow(infoWindow,point); //开启信息窗口
+}
+
+function dimensional(){
+	add();
+	$("input[name='met_maplng']").val(point.lng);
+	$("input[name='met_maplat']").val(point.lat);
+	$("input[name='met_mapzoom']").val(map.getZoom());
+	var met_maplng = $("input[name='met_maplng']").val();
+	var met_maplat = $("input[name='met_maplat']").val();
+	var met_mapzoom = $("input[name='met_mapzoom']").val();
+	var met_maptitle = $("input[name='met_maptitle']").val();
+	var met_mapcontents = editor.getData();
+	var durl = 'map.php?lang={$lang}&anyid={$anyid}&cs=5&action=modify';
+		durl+='&met_maplng='+encodeURIComponent(met_maplng);
+		durl+='&met_maplat='+encodeURIComponent(met_maplat);
+		durl+='&met_mapzoom='+encodeURIComponent(met_mapzoom);
+		durl+='&met_maptitle='+encodeURIComponent(met_maptitle);
+		durl+='&met_mapcontents='+encodeURIComponent(met_mapcontents);
+	$.ajax({url:durl,type: 'POST'});
+}
+</script>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

@@ -1,0 +1,113 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+$colspan=8;
+if(!$met_member_use)$colspan=$colspan-1;
+if($module==6 || $module==8)$colspan=$colspan-1;
+$colspanj=$colspan-1;
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="可选字段设置";
+require_once template('../../app/shop/top');
+echo <<<EOT
+-->
+<table cellpadding="0" cellspacing="0" class="table">
+	<tr>
+		<td colspan="5" class="color390 centle">此处添加的字段将会强制显示在每个产品页面中，以便用户选择，如产品选购的颜色等。</td>
+	</tr>
+		<tr>
+		<td colspan="2">
+			<form method="POST" name="myform" action="pfield.php?anyid={$anyid}&lang={$lang}&class1={$class1}&cs=3&module=3" target="_self">
+			<table cellpadding="0" cellspacing="0" class="table neitable" style="margin:0px; border:none;">
+		<tr id="list-top"> 
+			<td class="list" width="40" style="padding:0px; text-align:center;">{$lang_selected}</td>
+            <td width="60" class="list" style="padding:0px; text-align:center;">{$lang_sort}</td>
+            <td class="list">{$lang_name}</td>
+			<td class="list" style="padding:0px; text-align:center;">
+			<select name="category" onchange='javascript:window.location.href=this.options[this.selectedIndex].value'>
+			<option value="pfield.php?anyid={$anyid}&lang=$lang&module=$module" selected="selected">{$lang_category}</option>
+<!--
+EOT;
+foreach($met_classindex[$module] as $key=>$val1){
+if($class1==$val1[id])$gclass="selected='selected'";
+echo <<<EOT
+-->
+			  <option value="pfield.php?anyid={$anyid}&lang=$lang&module=$module&class1=$val1[id]" $gclass>{$val1[name]}</option>
+<!--
+EOT;
+$gclass="";
+}
+echo <<<EOT
+-->
+            </select>
+			</td>
+			<td width="90" class="list">{$lang_operate}</td>
+          </tr>
+<!--
+EOT;
+foreach($list as $key=>$val){
+echo <<<EOT
+-->		   
+			<tr class="mouse"> 
+              <td class="list-text"><input name='id' type='checkbox' id="id" value='$val[id]' /></td>
+			<td class="list-text">
+<input name='access_$val[id]' type="hidden" value="$val[access]">
+			<input name='no_order_$val[id]' type="text" class="text no_order" value="$val[no_order]"></td>
+            <td class="list-text" style="padding-left:15px; text-align:left;"><input name='name_{$val[id]}' type="text" class="text" value="{$val[name]}" ></td>			
+			<td class="list-text">
+			<select name="class1_$val[id]" >
+			<option value="0" selected="selected">{$lang_allcategory}</option>
+<!--
+EOT;
+foreach($met_classindex[$module] as $key=>$val1){
+if($val[class1]==$val1[id])$gclass1="selected='selected'";
+echo <<<EOT
+-->
+			  <option value="$val1[id]" $gclass1>{$val1[name]}</option>
+<!--
+EOT;
+$gclass1="";
+}
+echo <<<EOT
+-->
+            </select></td>
+			<td class="list-text"><a href="pfieldlist.php?anyid={$anyid}&bigid=$val[id]&lang=$lang&class1={$class1}">{$lang_listTitle}</a>&nbsp;&nbsp;<a href="pfield.php?anyid={$anyid}&id=$val[id]&action=del&bigid=$val[id]&lang=$lang&type=$val[type]&module=$module&class1=$class1" onClick="return linkSmit($(this),1);">{$lang_delete}</a></td>
+		  </tr>
+<!--
+EOT;
+}
+echo <<<EOT
+-->  
+		<tr id="bottom-id"> 
+			<td class="list-text"></td>
+			<td class="list-text" colspan="$colspanj" style="text-align:left;">&nbsp;&nbsp;<a href="pfield.php?anyid={$anyid}&lang=$lang&action=addsave&module=$module" onclick="return addsave($(this),0);">+{$lang_parameteradd}</a></td>
+        </tr>
+		</table>
+				<input name="action" type="hidden" value="delete" />
+				<input name="allid" type="hidden" id="allid" value="" />
+			</form>
+		</td>
+		</tr>
+          <tr> 
+			<td class="all" width="40"><input name="chkAll" type="checkbox" id="chkAll" onclick="CheckAllx($(this),'myform')" value="checkbox" /></td>
+			<td class="all-submit" style="padding:5px 10px;">
+				<input name="submit" type='submit' value='{$lang_Submit}' class="submit li-submit" onclick="return met_modify($(this),'myform','editor');" />
+				<input name="submit" type='submit' value='{$lang_deleteselected}' class="submit li-submit" onclick="return met_modify($(this),'myform','delete');" />
+			</td>
+          </tr>
+    <tr>
+		  <td class="footer" colspan="2">$foot</td>
+	  </tr>
+</table>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

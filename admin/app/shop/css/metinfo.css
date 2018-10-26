@@ -1,0 +1,20 @@
+.metshopk_xz_box{ width:360px; border:1px solid #999; position:relative;}
+.metshopk_xz_box ul{ padding:3px 4px 0px; overflow:hidden; zoom:1;}
+.metshopk_xz_box ul li{ float:left; cursor:default; position:relative;}
+.metshopk_xz_box ul li.xz_list{ border:1px solid #CAD8F3; display:block; background:#DEE7F8; padding:0px 5px; border-radius:5px; padding-right:15px; margin:0 5px 3px 0;}
+.metshopk_xz_box ul li.xz_list a{ position:absolute; right:4px; top:7px; width:7px; height:7px; background:url(../images/tbl_close.gif) no-repeat left top; overflow:hidden;}
+.metshopk_xz_box ul li.xz_tj{ white-space:nowrap; height:28px; line-height:28px;}
+.metshopk_xz_box ul li.xz_tj label{ position:absolute; left:0px; top:0px; height:28px; line-height:28px; color:#999; display:none;}
+.metshopk_xz_box ul li.xz_tj span{ cursor:pointer; padding:2px 0 2px 10px; background:url(../images/Ico_add.gif) no-repeat left center; color:#36C;}
+.metshopk_xz_box ul li.xz_tj input{ border:0; padding:2px 0px; height:14px; outline:0; position:relative; background:none;}
+
+.metshopk_xz_box ul li.on{ border:1px solid #6D95E0; background:#bbcef1;}
+.metshopk_xz_box ul li.on a.on{ background-position:left -7px;}
+
+.metshopk_xz_box span.tips{ position:absolute; left:370px; top:0px; height:28px; line-height:28px; white-space:nowrap;}
+
+.tixing_box{ position:relative;}
+.tixing_box label{ position:absolute; left:3px; top:1px; color:#999; z-index:1; display:none;}
+.tixing_box input,.tixing_box textarea{ position:relative; z-index:2; padding:2px; margin-bottom:8px; background:none; border:1px solid #999;}
+.tixing_box input{ height:20px; line-height:20px;}
+.tixing_box textarea{ padding:3px;}

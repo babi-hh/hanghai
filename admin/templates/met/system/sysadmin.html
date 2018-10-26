@@ -1,0 +1,256 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+<style type="text/css">
+.stsadmin_qyyy{ border:1px solid #dfdfdf; padding-bottom:0px!important;}
+.stsadmin_qyyy li{ float:left; padding:0px 15px; text-align:center;}
+.stsadmin_qyyy li img{ width:50px; height:50px;}
+.stsadmin_qyyy li a{ color:#666; text-decoration:none;}
+.stsadmin_qyyy li a p{ height:28px; line-height:28px;}
+</style>
+</head>
+<body>
+<!--
+EOT;
+require_once template('metlangs');
+if($met_agents_type>=2){
+	$style3="style=\"width:100%\"";
+	$style4="style=\"margin-left:8px\"";
+}
+echo <<<EOT
+-->
+<div class="sysadmin">
+	<div class="sysadmin_box_1" style="width:100%;display:none;">
+		<div class="sysadmin_box_cont">	
+			<h3>常用应用</h3>
+			<div class="boxcont stsadmin_qyyy">
+			<ul class="list-none">
+<!--
+EOT;
+foreach($ad_navlist3[44] as $key=>$val){
+if($val[id]!=14&&$val[id]!=45){
+$valiconx=explode('.gif',$val[icon]);
+$val[icon]=$valiconx[0].'.png';
+$admin_column_power="admin_pops".$val[field];
+if(!($metinfo_admin_pop=='metinfo'||$$admin_column_power=='metinfo')){
+	continue;
+}
+echo <<<EOT
+-->
+	<li>
+		<a href="{$val[url]}" title="{$val[name]}">
+			<img src="{$img_url}/icon/{$val[icon]}" />
+			<p>{$val[name]}</p>
+		</a>
+	</li>
+<!--
+EOT;
+}}
+echo <<<EOT
+--> 
+			</ul>
+			<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<div class="sysadmin_box_1" $style1>
+		<div class="sysadmin_box_cont">	
+			<h3>{$lang_upfiletips30}</h3>
+			<div class="boxcont" style="padding:0px;">
+				<table cellpadding="0" cellspacing="1" class="stat_table">
+	<tr>
+		<td class="t" width="30">{$lang_statips35}</td>
+		<td class="t" width="20">PV</td>
+		<td class="t" width="60">{$lang_statips21}</td>
+		<td class="t" width="20">IP</td>
+		<td class="t" style="font-size:12px;">{$lang_statips22}</td>
+	</tr>
+	<tr class="mouse">
+		<td class="t">{$lang_statips10}</td>
+		<td>{$visit[pv]}</td>
+		<td>{$visit[alone]}</td>
+		<td>{$visit[ip]}</td>
+		<td>{$per_visit}</td>
+	</tr>
+	<tr class="mouse">
+		<td class="t">{$lang_statips11}</td>
+		<td>{$visit_summaryz[pv]}</td>
+		<td>{$visit_summaryz[alone]}</td>
+		<td>{$visit_summaryz[ip]}</td>
+		<td>{$visit_summaryz['per']}</td>
+	</tr>
+	<tr class="mouse">
+		<td class="t">{$lang_unitytxt_48}</td>
+		<td>{$visit_summaryq[pv]}</td>
+		<td>{$visit_summaryq[alone]}</td>
+		<td>{$visit_summaryq[ip]}</td>
+		<td>{$visit_summaryq['per']}</td>
+	</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	
+	<div class="clear"></div>
+<!--
+EOT;
+if($authinfo['authcode']&&$authinfo['authpass']&&$met_agents_type<=1){
+echo <<<EOT
+-->
+	<div class="sysadmin_box_7">
+		<div class="sysadmin_box_cont">
+			<h3>{$lang_unitytxt_60}</h3>
+			<table cellpadding="0" cellspacing="1" class="stat_table">
+				<tr class="mouse">
+					<td class="t">{$lang_unitytxt_61}</td>
+					<td class="t">{$lang_unitytxt_62}</td>
+					<td class="t">{$lang_unitytxt_63}</td>
+					<td class="t">{$lang_unitytxt_64}</td>
+				</tr>
+				<tr>
+					<td class="t">{$lang_unitytxt_65}</td>
+					<td id="authcode_server_3"></td>
+					<td id="authcode_server_2"></td>
+					<td id="authcode_server_1"></td>
+				</tr>
+				<tr>
+					<td class="t">{$lang_unitytxt_66}</td>
+					<td id="authcode_server_time_3"></td>
+					<td id="authcode_server_time_2"></td>
+					<td id="authcode_server_time_1"></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+	<div class="clear"></div>
+
+</div>
+<div class="footer">{$foot}</div>
+<script type="text/javascript">
+<!--
+EOT;
+if($click==1){
+echo <<<EOT
+-->
+$('#updatenow').click();
+<!--
+EOT;
+}
+echo <<<EOT
+-->	
+metgetdata('#newslist','http://www.metinfo.cn/metv5news.php?fromurl=$met_weburl&action=json');
+function metHeight(group){
+	tallest=0;
+	group.each(function(){
+		thisHeight=jQuery(this).height();
+		if(thisHeight>tallest){
+			tallest=thisHeight;
+		}
+	});
+	group.height(tallest);
+}
+$(document).ready(function(){
+	var autbox = $(".sysadmin_box_6 .boxcont");
+	var fubox = $(".sysadmin_box_8 .stat_table");
+	if(autbox.size()>0){
+		var nhh = autbox.height()+12;
+		if(fubox.height()<nhh){
+			fubox.height(nhh);
+		}else{
+			autbox.height(fubox.height()-12);
+		}
+	}
+	var group1 = $(".sysadmin_box_1 .stat_table,.sysadmin_box_2 .stat_table,.sysadmin_box_3 .text");
+	metHeight(group1);
+	ifreme_methei();
+});
+function divshowiframe(div){
+	var content=$('#update_content_control', parent.document);
+	content.click();
+	//
+	//content.height($(window).height());
+	//content.width($(window).width());
+	//content.show();
+}
+</script>
+<!--
+EOT;
+if($authinfo['authcode']&&$authinfo['authpass']){
+$authinfo['authcode']=urlencode($authinfo['authcode']);
+$authinfo['authpass']=urlencode($authinfo['authpass']);
+echo <<<EOT
+-->
+<script type="text/javascript">
+function showauth(tp){
+	if(tp==1){
+		setTimeout("$('.showauth').hide();$('.showauth_n').show();",200);
+	}else{
+		setTimeout("$('.showauth').show();$('.showauth_n').hide();",200);
+	}
+}
+$(document).ready(function(){
+	var autbox = $(".sysadmin_box_6 .stat_table");
+	var fubox = $(".sysadmin_box_8 .stat_table");
+	if(fubox.height()>autbox.height()){
+		autbox.height(fubox.height());
+	}
+	$('#authcode_domain').html("$lang_jsx1");
+	$.ajax({
+		url: 'http://{$met_host}/authorize.php?action=json&met_code={$authinfo[authcode]}&met_key={$authinfo[authpass]}&url=$met_weburl&datatype=data&weblang={$lang}',
+		type: 'GET',
+		dataType: 'jsonp',
+		jsonp: 'jsoncallback',
+		success: function(data) {
+			$('#authcode_domain').html('');
+			//
+			$("#authcode_domain").html(data.msg.domain);
+			$("#authcode_webname").html(data.msg.webname);
+			$("#authcode_webtype").html(data.msg.webtype_h);
+			$("#authcode_buytime").html(data.msg.buytime);
+			$("#authcode_lifetime").html(data.msg.lifetime);
+			//
+			$("#authcode_server_1").html(data.msg.bbshtml);
+			$("#authcode_server_2").html(data.msg.qqhtml);
+			$("#authcode_server_3").html(data.msg.telhtml);
+			$("#authcode_server_time_1").html(data.msg.bbstime);
+			$("#authcode_server_time_2").html(data.msg.qqtime);
+			$("#authcode_server_time_3").html(data.msg.teltime);
+			//
+			setTimeout("ifreme_methei()",100);
+			setTimeout("ifreme_methei()",500);
+			setTimeout("ifreme_methei()",1000);
+			setTimeout("ifreme_methei()",2000);
+		}
+	});
+	setTimeout(function() {
+		if($('#loading').html()=='$lang_jsx1'){
+			$('#loading').html('$lang_jsx21');
+		}
+	},
+	30000);
+});
+</script>
+
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

@@ -1,0 +1,88 @@
+<!--<?php
+require_once template('head'); 
+echo <<<EOT
+-->
+<!--联系我们 -->
+<div class="page-contact-box">
+	<div class="wrap">
+    	
+        <!--联系方式 -->
+        <div class="way">
+        	<h3>纽仕达</h3>
+            <h4>业务咨询：<b>4008-799-897</b></h4>
+            <ul>
+            	<li class="lx01">地址：深圳市龙华新区民治大道展滔科技大厦C座4楼</li>
+                <li class="lx02">电话：4008-799-897</li>
+                <li class="lx03">传真：0755-23770670</li>
+                <li class="lx04">邮箱：800136015@qq.com</li>
+            </ul>
+        </div>
+        <!--联系方式 -->
+        
+        <!--联系地图 -->
+        <div class="map pc">
+        	<iframe width="504" height="425" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://j.map.baidu.com/s/_sPXLV"></iframe>
+        </div>
+        <!--联系地图 -->
+        
+        <!--联系地图 -->
+        <div class="map wap">
+        	<iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://j.map.baidu.com/s/_sPXLV"></iframe>
+        </div>
+        <!--联系地图 -->
+        
+    </div>
+</div>
+<!--联系我们 -->
+
+<!--提交留言 -->
+<form method='POST' name='myform' class="registerform" action='{$index_url}message/message.php?action=add&lang=cn' target='_self'>
+<div class="page-message">
+	<div class="wrap">
+    	<ul>
+        	<li class="ly01">
+            	<input placeholder="您的姓名" datatype="*" nullmsg="姓名不能为空" errormsg="" name="para88"/>
+            </li>
+            <li class="ly02">
+            	<input placeholder="您的手机" datatype="m" nullmsg="电话不能为空" errormsg="请输入正确联系电话" name="para89"/>
+            </li>
+            <li class="ly03">
+            	<input placeholder="您的QQ" name="para91"/>
+            </li>
+            <li class="ly04">
+            	<textarea placeholder="详细咨询" datatype="*" nullmsg="内容不能为空" errormsg="" name="para92"></textarea>
+            </li>
+            <li class="ly05">
+            	<button name="dosubmit" type="submit">提交</button>
+            </li>
+        </ul>
+    </div>
+</div>
+<input type='hidden' name='lang' value='cn' />
+<input type='hidden' name='ip' value='{$m_user_ip}' />
+<input type='hidden' name='totnum' value='7' />
+<input type="hidden" name="fid_url" value="1">
+</form>
+<script type="text/javascript" src="{$img_url}js/Validform_v5.3.2.js"></script>
+<script>
+$(function(){
+        $(".registerform").Validform({
+            postonce:true,
+			tipSweep:true,
+            tiptype:function(msg,o,cssctl){
+                if(o.type==3){
+                    alert(msg);
+                    o.obj.focus();
+                }
+            },
+        
+
+        });
+    })
+
+</script>
+<!--提交留言 -->
+<!--
+EOT;
+require_once template('foot');
+?>

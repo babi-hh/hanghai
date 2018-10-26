@@ -1,0 +1,61 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+</head>
+<body>
+<!--
+EOT;
+$title="支付接口设置";
+//$rurl="../dlapp/index.php?anyid={$anyid}&lang={$lang}";
+require_once template('metlangs');
+require_once template('../../app/shop/top');
+echo <<<EOT
+-->
+<form method="POST" name="myform" action="alipayset.php?anyid={$anyid}&lang={$lang}&cs={$cs}" target="_self">
+<input name="action" id="action" type="hidden" value="modify" />
+<table cellpadding="2" cellspacing="1" class="table">
+	<tr>
+		<td class="text"></td>
+		<td class="input color390">支付接口信息（<a href="http://www.metinfo.cn/course/faq/30-cn.html" target="_blank" >如何设置支付接口信息？</a>）</td>
+	</tr>
+		<tr>
+		<td class="text">支付宝账号：</td>
+		<td class="input"><input name="met_shop_seller_email" class="text" value="$met_shop_seller_email"/>
+		</td>
+	</tr>
+		<tr>
+		<td class="text">合作身份者id：</td>
+		<td class="input"><input name="met_shop_partner" class="text" value="$met_shop_partner"/>
+		</td>
+	</tr>
+		<tr>
+		<td class="text">安全检验码：</td>
+		<td class="input"><input name="met_shop_key" class="text" value="$met_shop_key"/>
+		</td>
+	</tr>
+		<tr>
+		<td class="text">注意：</td>
+		<td class="input">支付接口暂时只支持支付宝即时到帐，支付宝其他付款方式和其他接口都暂不支持。
+		</td>
+	</tr>
+		<tr> 
+		<td class="text"></td>
+		<td class="submit">
+			<input name="submit" type='submit' value='保存' class="submit li-submit" onClick="return momethod();" />
+		</td>
+    </tr>
+</table>		
+</form>
+
+
+<div class="footer">$foot</div>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

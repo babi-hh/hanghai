@@ -1,0 +1,27 @@
+/*红色*/
+
+/*背景颜色*/
+.top{ background-color:#000; }/*顶部背景颜色*/
+.top-right li.now,.seachbox{ background-color:#555; }/*顶部工具栏点击后变色*/
+.seachbox input.submit{ background-color:#000; }/*顶部工具栏按钮颜色*/
+nav.type1,nav.type2 ul,nav.type2 ul li,.index-product .ui-slider-dots b.ui-state-active{ background-color:#333;}
+nav.type1 ul li.navdown{ background-color:#ededed;}/*当前页面导航颜色*/
+.style-1 h3.title{ background:-webkit-gradient(linear,0 0,0 100%,from(#333),to(#000));} /*首页区块标题背景*/
+
+/*面板*/
+#wrapper_nav,nav.panel,#wrapper_sidebar,#sidebar,#sidebar dl{ background-color:#222;}/*面板背景颜色*/
+nav.panel h3.title,#sidebar h3.title{ background-color:#333;}/*面板标题背景颜色*/
+nav.panel ul li,#sidebar dt,#sidebar dd{ border-color:#111; }/*面板底部边框颜色*/
+
+/*底部固定功能*/
+#footer .footerlist{ background:-webkit-gradient(linear,0 0,0 100%,from(#333),to(#000));}
+
+/*边框颜色*/
+nav.type2 ul li a,nav.type1 ul li{ border-color:#222;}
+
+.metinfo_mobile_form li.radio span.name,.metinfo_mobile_form li.select span.name{ 
+	background-image: linear-gradient(#333, #000);
+	border-color:#000;
+}
+#memberbox .member_login_more a{ color:#c00;}
+#sitemaplist h2{background-image: linear-gradient(#333, #000);}

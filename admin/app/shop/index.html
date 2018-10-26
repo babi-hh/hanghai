@@ -1,0 +1,109 @@
+<!--<?php
+# MetInfo Enterprise Content Management System 
+# Copyright (C) MetInfo Co.,Ltd (http://www.metinfo.cn). All rights reserved.
+require_once template('head');
+echo <<<EOT
+-->
+<title>订单管理</title>
+</head>
+<body>
+<!--
+EOT;
+$title="订单管理";
+require_once template('metlangs');
+if($status==1){
+   $style1="style='color:#FF0000' selected='selected'";
+ }elseif($status==2){
+   $style2="style='color:#FF0000' selected='selected'";
+ }elseif($status==3){
+   $style3="style='color:#FF0000' selected='selected'";
+  }elseif($status==4){
+   $style4="style='color:#FF0000' selected='selected'";
+  }elseif($status==5){
+   $style5="style='color:#FF0000' selected='selected'";
+ }elseif($status==''){
+   $style0="style='color:#FF0000' selected='selected'";
+ }
+require_once template('../../app/shop/top');
+echo <<<EOT
+-->
+<table cellpadding="2" cellspacing="1" class="table">
+          <tr>
+            <td class="centle" colspan="7" style=" height:20px; line-height:30px; font-weight:normal; padding-left:10px;">
+				<div style="float:left;">
+				</div>
+				<div class="formright">		
+			<form method="POST" name="search" action="index.php?search=detail_search&lang=$lang&anyid={$anyid}&cs=1" target="_self">
+			<input name="ordernumber" type="text" class="text" id="searchtext" value="订单号查询" />
+			<input name="status" type="hidden" value="$status" />
+			<input type="submit" name="searchsubmit" value="{$lang_search}" class="submitmi" />
+			</form>
+				</div>
+			<div style="float:left; margin-right:5px; font-weight:normal;" >
+ 			    订单状态分类&nbsp;<select name="new" id="new" onChange="changes($(this));">
+					<option value="index.php?anyid={$anyid}&lang=$lang" $style0>全部</option>
+					<option value="index.php?anyid={$anyid}&status=1&lang=$lang" $style1>订购中</option>
+					<option value="index.php?anyid={$anyid}&status=2&lang=$lang" $style2>已下单</option>
+					<option value="index.php?anyid={$anyid}&status=3&lang=$lang" $style3>已付款</option>
+					<option value="index.php?anyid={$anyid}&status=4&lang=$lang" $style4>已发货</option>
+					<option value="index.php?anyid={$anyid}&status=5&lang=$lang" $style5>交易完成</option>
+				</select>
+			</div> 
+			</td>
+          </tr>
+              <tr>
+                <td width="40" class="list" style="padding:0px; text-align:center;">{$lang_selected}</td>
+                <td width="100" class="list">订单号</td>
+                <td width="100" class="list" style="padding:0px; text-align:center;">状态</td>
+                <td width="120" class="list" style="padding:0px; text-align:center;">订购用户名</td>
+                <td width="160" class="list" style="padding:0px; text-align:center;">时间</td>
+				<td class="list">备注</td>
+				<td width="100" class="list">{$lang_operate}</td>
+              </tr>
+			  <form name="del" method="post" action="index.php?lang=$lang&anyid=$anyid&cs=1">
+<!--
+EOT;
+foreach ($orders as $key=>$val){
+echo <<<EOT
+-->          
+              <tr class="mouse click">
+              <td class="list-text"><input name='id' type='checkbox' onClick="unselectall()" id="id" value='$val[id]' /></td>
+                <td class="list-text alignleft">&nbsp;&nbsp;<a href="ordereditor.php?id=$val[id]&lang=$lang&anyid={$anyid}" title="{$lang_detail}">$val[ordernumber]</a></td>
+                <td class="list-text color999">$val[status]</td>
+                <td class="list-text color999">$val[username]</td>
+                <td class="list-text color999">$val[time]</td>
+				<td class="list-text color999" >$val[remark] </td>
+				<td class="list-text"><a href="ordereditor.php?id=$val[id]&lang=$lang&anyid={$anyid}" >{$lang_setfileview}{$lang_editor}</a>&nbsp;&nbsp;<a href="index.php?id=$val[id]&lang=$lang&anyid={$anyid}&action=delete" onClick="return linkSmit($(this),1);" >{$lang_delete}</a></td>
+              </tr>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+<input name="action" type="hidden" id="action" value="del">
+<input name="allid" type="hidden" id="allid" value=""></form>
+   	   <tr> 
+            <td width="40" class="all"><input name="chkAll" type="checkbox" id="chkAll" onclick="CheckAllx($(this),'del')" value="checkbox" /></td>
+			  <td class="all-submit" colspan="6" style="padding:5px 10px;">
+			  <input name="submit" type='submit' value='{$lang_deleteselected}' class="submit li-submit" onclick="return met_modify($(this),'del','del');" /> 
+              </td>
+          </tr>
+		 <tr>
+		  <td class="page_list" colspan="7">$page_list</td>
+	  </tr>
+		 <tr>
+		  <td class="footer" colspan="7">$foot</td>
+	  </tr>
+</table>
+<script type="text/javascript">
+$(document).ready(function(){
+	seachinput($('#searchtext'),'订单号查询');
+});
+</script>
+</body>
+</html>
+<!--
+EOT;
+# This program is an open source system, commercial use, please consciously to purchase commercial license.
+# Copyright (C) MetInfo Co., Ltd. (http://www.metinfo.cn). All rights reserved.
+?>-->

@@ -1,0 +1,44 @@
+<!--<?php
+$Column4[name] = $lang_Column4_title==''?$Column4[name]:$lang_Column4_title;
+if($lang_Column4_urlOK){
+	$urlhtmla = "<a href=\"{$Column4[url]}\">";
+	$urlhtmlb = '<span class="more"></span></a>';
+	$urlhtmlc = '';
+}else{
+	$urlhtmla = '';
+	$urlhtmlb = '';
+	$urlhtmlc = 'urlno';
+}
+echo <<<EOT
+-->
+<!--文章列表-->
+	<div class="newslist style-1">
+		<h3 class='title {$urlhtmlc}'>{$urlhtmla}{$Column4[name]}{$urlhtmlb}</h3>
+		<div class="active">
+			<ul>
+<!--
+EOT;
+$newlist=methtml_getarray($lang_Column4,$lang_Column4_xxtype,'','',$lang_newslistnum);
+foreach($newlist as $key=>$val){
+if($val[news])$val[drx]="[{$lang_drxnew}]";
+if($val[hot])$val[drx]="[{$lang_drxhot}]";
+if($val[top])$val[drx]="[{$lang_drxtop}]";
+echo <<<EOT
+-->
+				<li>
+					<a href="{$val[url]}">
+						<h4><p class="t"><span class="hot">{$val[drx]}</span>{$val[title]}</p><p class="time">{$val[updatetime]}</p></h4>
+						<span class="more"></span>
+					</a>
+				</li>
+<!--
+EOT;
+}
+echo <<<EOT
+-->
+			</ul>
+		</div>
+	</div>
+<!--
+EOT;
+?>
