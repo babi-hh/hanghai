@@ -40,6 +40,9 @@ echo <<<EOT
 <div class="page-message">
 	<div class="wrap">
     	<ul>
+            <li class="ly00">
+                <input placeholder="行业(产品名称)" datatype="*" nullmsg="行业(产品名称)" errormsg="" name="para98"/>
+            </li>
         	<li class="ly01">
             	<input placeholder="您的姓名" datatype="*" nullmsg="姓名不能为空" errormsg="" name="para88"/>
             </li>
@@ -47,7 +50,46 @@ echo <<<EOT
             	<input placeholder="您的手机" datatype="m" nullmsg="电话不能为空" errormsg="请输入正确联系电话" name="para89"/>
             </li>
             <li class="ly03">
-            	<input placeholder="您的QQ" name="para91"/>
+            	<input placeholder="您的职位" name="para99"/>
+            </li>
+            <li class="ly04" style="padding-bottom: 0px;">
+                <div class="page-message-optimization">
+                    <div class="wrap">
+                        <h2 style="text-align: center; margin-bottom: 15px">
+                            <b>请选择服务项目(多选)</b>
+                        </h2>
+                        <ul>
+                            <li><label for="pdd"><input type="checkbox" id="pdd" name="brand[]" value="拼多多">拼多多</label></li>
+                            <li><label for="tb"><input type="checkbox" id="tb" name="brand[]" value="淘宝">淘宝</label></li>
+                            <li><label for="tm"><input type="checkbox" id="tm" name="brand[]" value="天猫">天猫</label></li>
+                            <li><label for="jd"><input type="checkbox" id="jd" name="brand[]" value="京东">京东</label></li>
+                        </ul>
+                        <ul>
+                            <li><label for="xqysj"><input type="checkbox" id="xqysj" name="design_entity[]" value="详情页设计">详情页设计</label></li>
+                            <li><label for="dpzx"><input type="checkbox" id="dpzx" name="design_entity[]" value="店铺装修设计">店铺装修设计</label></li>
+                            <li><label for="ztcsjt"><input type="checkbox" id="ztcsjt" name="design_entity[]" value="直通车图设计">直通车图设计</label></li>
+                            <li><label for="hdhbsj"><input type="checkbox" id="hdhbsj" name="design_entity[]" value="活动海报设计">活动海报设计</label></li>
+                            <li><label for="qzsj"><input type="checkbox" id="qzsj" name="design_entity[]" value="全店设计">全店设计</label></li>
+                        </ul>
+                    
+                        <ul>
+                            <li><label for="visj"><input type="checkbox" id="visj" name="design_page[]" value="VI设计">VI设计</label></li>
+                            <li><label for="logosj"><input type="checkbox" id="logosj" name="design_page[]" value="LOGO设计">LOGO设计</label></li>
+                            <li><label for="bzsj"><input type="checkbox" id="bzsj" name="design_page[]" value="包装设计">包装设计</label></li>
+                            <li><label for="hbsj"><input type="checkbox" id="hbsj" name="design_page[]" value="H5海报设计">H5海报设计</label></li>
+                            <li><label for="dysj"><input type="checkbox" id="dysj" name="design_page[]" value="DM单页设计">DM单页设计</label></li>
+                            <li><label for="qtsj"><input type="checkbox" id="qtsj" name="design_page[]" value="其他设计">其他设计</label></li>
+                        </ul>
+    
+                        <ul>
+                            <li><label for="mbwz"><input type="checkbox" id="mbwz" name="website[]" value="模板网站套餐">模板网站套餐</label></li>
+                            <li><label for="qypp"><input type="checkbox" id="qypp" name="website[]" value="企业品牌网站">企业品牌网站</label></li>
+                            <li><label for="gwsc"><input type="checkbox" id="gwsc" name="website[]" value="购物商城网站">购物商城网站</label></li>
+                            <li><label for="wmwz"><input type="checkbox" id="wmwz" name="website[]" value="外贸网站建设">外贸网站建设</label></li>
+                            <li><label for="hymh"><input type="checkbox" id="hymh" name="website[]" value="行业门户网站">行业门户网站</label></li>
+                        </ul>
+                    </div>
+                </div>
             </li>
             <li class="ly04">
             	<textarea placeholder="详细咨询" datatype="*" nullmsg="内容不能为空" errormsg="" name="para92"></textarea>
