@@ -51,6 +51,18 @@ if($action=="add"){
 	$fdstr = $met_fd_word; 
 	$fdarray=explode("|",$fdstr);
 	$fdarrayno=count($fdarray);
+    $industry = 'para98';
+    $position = 'para99';
+    $ele_comm = 'para100';
+    $shop_design = 'para101';
+    $brand_design = 'para102';
+    $site_cont = 'para103';
+    !empty($_POST['para98']) && $$industry = htmlentities(addslashes($_POST['para98']));
+    !empty($_POST['para99']) && $$position = htmlentities(addslashes($_POST['para99']));
+    !empty($_POST['para100']) && $$ele_comm = $_POST['para100'];
+    !empty($_POST['para102']) && $$shop_design = $_POST['para102'];
+    !empty($_POST['para103']) && $$brand_design = $_POST['para103'];
+    !empty($_POST['para104']) && $$site_cont = $_POST['para104'];
 	$fdok=false;
 	$content=$content."-".$pname."-".$tel."-".$email."-".$info;
 	for($i=0;$i<$fdarrayno;$i++){
@@ -116,6 +128,7 @@ if($action=="add"){
 		if($val[type]!=4){
 			$infos ="para".$val[id];
 			$info=$$infos;
+            is_array($info) && $info = htmlentities(addslashes(implode('|', $info)));
 			if($val['wr_ok'] == 1){
 				if($info == ''){
 					$last_page=$_SERVER[HTTP_REFERER];
